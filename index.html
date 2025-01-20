@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.1.0/progressbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#dashboard" onclick="closeNav()">Dashboard</a>
+        <a href="#income" onclick="closeNav()">Income</a>
+        <a href="#budget" onclick="closeNav()">Budget</a>
+        <a href="#expense" onclick="closeNav()">Expense</a>
+        <a id = "reset" href="#pageName" onclick="closeNav()">Reset</a>
+    </div>
+    <div id="overlay" onclick="closeNav()"></div>
+    <div id="main">
+        <nav class="navbar">
+            <ul>
+                <li onclick="openNav()" style="font-size: 20px; cursor: pointer; font-weight: bold;">&#9776;</li>
+                <li style="font-size: 1.3rem; font-weight: 500;">Expense Tracker</li>
+            </ul>
+        </nav>
+        <main class="main">
+            <section class="pageName" id="pageName">
+                <div class="welcome">
+                    <h1>Welcome</h1>
+                </div>
+            </section>
+            <section class="dashboard" id="dashboard" data-aos="fade-right">
+                <div class="topContainer">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <div class="title">Dashboard</div>
+                </div>
+                <hr>
+                <div class="bottomcontainer" data-aos="fade-right">
+                    <div class="totalBox">
+                        <div><i class="uil uil-thumbs-up"></i></div>
+                        <div class="totalName">Total Balance</div>
+                        <div class="totalBalance">0</div>
+                    </div>
+                    <div class="totalBox">
+                        <div><i class="uil uil-comments"></i></div>
+                        <div class="totalName">Total Income</div>
+                        <div class="totalIncome">0</div>
+                    </div>
+                    <div class="totalBox">
+                        <div><i class="uil uil-share"></i></div>
+                        <div class="totalName">Total Expense</div>
+                        <div class="totalExpense">0</div>
+                    </div>
+                </div>
+            </section>
+            <section class="income" id="income">
+                <div class="incomeDetails" data-aos="fade-right">
+                    <div class="topContainer">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <div class="title" data-aos="fade-right">Income Details</div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="form-container">
+                        <form id="incomeForm">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="incomeAmount" placeholder="Enter amount" min="1" required />
+
+                            <label for="date">Date</label>
+                            <input type="date" id="incomeDate" placeholder="dd-mm-yyyy" required />
+
+                            <label for="remarks">Remarks</label>
+                            <input type="text" id="incomeRemark" placeholder="Enter your income Remarks" required />
+
+                            <label for="type">Type of source</label>
+                            <select id="incomeType" required>
+                                <option value="" disabled selected>Select Type</option>
+                                <option value="Salary">Salary</option>
+                                <option value="Business">Business</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                            <button type="submit">Add ➤</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="secondIncomeBox" data-aos="fade-right">
+                    <div class="topContainer">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <div class="title" data-aos="fade-right">Income History</div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="incomeHistory">
+
+                    </div>
+
+                </div>
+                <div data-aos="fade-right">
+                    <div class="topContainer">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <div class="title" data-aos="fade-right">Income Chart</div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="chart">
+                        <canvas id="incomeChart" width="350px" ; height="350px"></canvas>
+                    </div>
+
+                </div>
+            </section>
+            <section class="budget" id="budget">
+                <div class="budgetDetails" data-aos="fade-right">
+                    <div class="topContainer">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <div class="title" data-aos="fade-right">Budget Details</div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="form-container">
+                        <form id="budgetForm">
+                            <label for="amount">Budget</label>
+                            <input type="number" id="budgetAmount" placeholder="Enter amount" min="1" required />
+                            <label for="remarks">Type</label>
+                            <input type="text" id="budgetType" placeholder="Enter type" required />
+                            <button type="submit">Next ➤</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div data-aos="fade-right" class="secondBudgetBox">
+                    <div class="topContainer">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <div class="title" data-aos="fade-right">Budget List</div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="budgetBarDiv">
+                        
+                    </div>
+                </div>
+            </section>
+            <section class="expense" id="expense">
+                <div class="expenseDetails" data-aos="fade-right">
+                    <div class="topContainer">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <div class="title" data-aos="fade-right">Expense Details</div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="form-container">
+                        <form id="expenseForm">
+                            <label for="amount">Expense</label>
+                            <input type="number" id="expenseAmount" placeholder="Enter your expense" min="1" required />
+
+                            <label for="date">Date</label>
+                            <input type="date" id="expenseDate" placeholder="dd-mm-yyyy" required />
+
+                            <label for="remarks">Remarks</label>
+                            <input type="text" id="expenseRemark" placeholder="Enter your expense Remarks" required />
+
+                            <label for="type">Type of source</label>
+                            <select id="expenseType" required>
+                                <option value="" disabled selected>Select Type</option>
+                            </select>
+
+                            <button type="submit">Next ➤</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="secondExpenseBox" data-aos="fade-right">
+                    <div class="topContainer">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <div class="title" data-aos="fade-right">Expense History</div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="expenseHistory">
+
+                    </div>
+
+                </div>
+                <div data-aos="fade-right">
+                    <div class="topContainer">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <div class="title" data-aos="fade-right">Expense Chart</div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="chart">
+                        <canvas id="expenseChart" width="350px" ; height="350px"></canvas>
+                    </div>
+
+                </div>
+            </section>
+            <section class="footer">
+                <h1>made with ❤️ by <a class="owner" href="https://github.com/vaibhavxtripathi"
+                        target="_blank">Vaibhav.</a></h1>
+                <div style="text-align: right;">
+                    <span style="font-size: 15px;">
+                        OG credit to <a class="owner" href="https://github.com/dewank07" target="_blank">Dewank
+                            bhaiya.</a>
+                    </span>
+                </div>
+            </section>
+        </main>
+
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+</html>
